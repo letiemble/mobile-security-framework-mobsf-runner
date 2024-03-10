@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+
+  mobsf:
+    image: opensecurity/mobile-security-framework-mobsf:latest
+    environment:
+      MOBSF_API_KEY: "Y@U_N!V3R_KN0W_WH0_US3_Y@U"
+    # ports:
+    #   - "8000:8000"
+
+  mobsf-runner:
+    image: letiemble/mobile-security-framework-mobsf-runner:latest
+    environment:
+      INPUT_FILE: "${INPUT_FILE}"
+      MOBSF_API_KEY: "Y@U_N!V3R_KN0W_WH0_US3_Y@U"
+      MOBSF_URL: "http://mobsf:8000"
+    volumes:
+      - .:/input
+      - .:/output
+    depends_on:
+      - mobsf
